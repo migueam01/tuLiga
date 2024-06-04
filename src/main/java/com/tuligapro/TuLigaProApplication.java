@@ -10,4 +10,5 @@ public class TuLigaProApplication {
 		SpringApplication.run(TuLigaProApplication.class, args);
 	}
 
+	
 }

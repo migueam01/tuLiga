@@ -14,7 +14,7 @@
 	<name>TuLigaPro</name>
 	<description>Sistema para la Administración de ligas barriales</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 

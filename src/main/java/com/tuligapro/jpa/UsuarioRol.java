@@ -11,25 +11,26 @@ import java.time.Instant;
 @Entity
 @Table(name = "usuario_rol")
 public class UsuarioRol {
-    @Id
-    @Column(name = "usro_id", nullable = false)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "usro_id", nullable = false)
+	private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usr_id")
-    private Usuario usr;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "usr_id")
+	private Usuario usr;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rol_id")
+	private Rol rol;
 
-    @Column(name = "estado")
-    private String estado;
+	@Column(name = "estado")
+	private String estado;
 
-    @Column(name = "create_on")
-    private Instant createOn;
+	@Column(name = "create_on")
+	private Instant createOn;
 
-    @Column(name = "create_by")
-    private String createBy;
+	@Column(name = "create_by")
+	private String createBy;
 
 }
