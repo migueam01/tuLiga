@@ -12,7 +12,7 @@ import java.time.Instant;
 @Table(name = "usuario_rol")
 public class UsuarioRol {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "usro_id", nullable = false)
 	private Integer id;
 

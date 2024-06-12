@@ -27,8 +27,9 @@ public class PartidoServiceImpl implements IPartidoService {
 	}
 
 	@Override
-	public Optional<Partido> leerPorId(Integer id) {
-		return repo.findById(id);
+	public Partido leerPorId(Integer id) {
+		Optional<Partido> partido = repo.findById(id);
+		return partido.isPresent() ? partido.get() : new Partido();
 	}
 
 	@Override

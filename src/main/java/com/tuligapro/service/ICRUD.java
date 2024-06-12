@@ -1,7 +1,6 @@
 package com.tuligapro.service;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ICRUD<T> {
 
@@ -9,7 +8,7 @@ public interface ICRUD<T> {
 
 	T modificar(T t);
 
-	Optional<T> leerPorId(Integer id);
+	T leerPorId(Integer id);
 
 	List<T> listarTodo();
 

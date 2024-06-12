@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
 
@@ -13,7 +14,7 @@ import java.time.Instant;
 @Table(name = "partido")
 public class Partido {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "prt_id", nullable = false)
 	private Integer id;
 
@@ -50,7 +51,8 @@ public class Partido {
 	@Column(name = "create_on")
 	private Instant createOn;
 
-	@Column(name = "create_by", length = 64)
+	@Size(max = 64, message = "Debe tener máximo 64 caracteres")
+	@Column(name = "create_by")
 	private String createBy;
 
 	public Integer getId() {

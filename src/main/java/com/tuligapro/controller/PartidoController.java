@@ -1,9 +1,10 @@
 package com.tuligapro.controller;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tuligapro.exception.ModeloNotFoundException;
 import com.tuligapro.jpa.Partido;
 import com.tuligapro.service.IPartidoService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/partidos")
@@ -23,29 +27,48 @@ public class PartidoController {
 	@Autowired
 	private IPartidoService service;
 
-	@GetMapping
-	public List<Partido> listarTodo() {
-		return service.listarTodo();
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Partido>> listarTodo() {
+		List<Partido> partidos = service.listarTodo();
+		return new ResponseEntity<List<Partido>>(partidos, HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
-	public Optional<Partido> listarPorId(@PathVariable("id") Integer idPartido) {
-		return service.leerPorId(idPartido);
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Partido> listarPorId(@PathVariable("id") Integer idPartido) {
+		Partido partido = new Partido();
+		partido = service.leerPorId(idPartido);
+		if (partido.getId() == null) {
+			throw new ModeloNotFoundException("Id no encontrado: " + idPartido);
+		}
+		return new ResponseEntity<Partido>(partido, HttpStatus.OK);
 	}
 
-	@PostMapping
-	public Partido guardar(@RequestBody Partido p) {
-		return service.guardar(p);
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Partido> guardar(@Valid @RequestBody Partido partido) {
+		Partido p = service.guardar(partido);
+		return new ResponseEntity<Partido>(p, HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public Partido modificar(@RequestBody Partido p) {
-		return service.guardar(p);
+	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> modificar(@Valid @RequestBody Partido p) {
+		Partido partidoAnterior = service.leerPorId(p.getId());
+		if (partidoAnterior.getId() == null) {
+			throw new ModeloNotFoundException("Id no encontrado: " + p.getId());
+		} else {
+			service.modificar(p);
+		}
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
-	public void eliminar(@PathVariable("id") Integer idPartido) {
-		service.eliminar(idPartido);
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> eliminar(@PathVariable("id") Integer idPartido) {
+		Partido partido = service.leerPorId(idPartido);
+		if (partido.getId() == null) {
+			throw new ModeloNotFoundException("Id no encontrado: " + idPartido);
+		} else {
+			service.eliminar(idPartido);
+		}
+		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 }

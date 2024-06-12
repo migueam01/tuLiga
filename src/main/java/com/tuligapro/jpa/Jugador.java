@@ -12,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "jugador")
 public class Jugador {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "jgd_id", nullable = false)
 	private Integer id;
 
