@@ -82,7 +82,7 @@ public class PartidoController {
         return new ResponseEntity<Object>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "/tablaPosiciones", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/tabla_posiciones", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<TablaPosicionesDTO>> listarTablaPosiciones() {
         List<TablaPosicionesDTO> tablaPosiciones = new ArrayList<>();
         tablaPosiciones = service.listarTablaPosiciones();
