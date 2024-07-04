@@ -1,7 +1,9 @@
 package com.tuligapro.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.tuligapro.dtos.TablaPosicionesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -78,6 +80,13 @@ public class PartidoController {
             service.eliminar(idPartido);
         }
         return new ResponseEntity<Object>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tablaPosiciones", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TablaPosicionesDTO>> listarTablaPosiciones() {
+        List<TablaPosicionesDTO> tablaPosiciones = new ArrayList<>();
+        tablaPosiciones = service.listarTablaPosiciones();
+        return new ResponseEntity<List<TablaPosicionesDTO>>(tablaPosiciones, HttpStatus.OK);
     }
 
 }

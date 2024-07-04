@@ -1,8 +1,10 @@
 package com.tuligapro.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.tuligapro.dtos.TablaPosicionesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,5 +49,24 @@ public class PartidoServiceImpl implements IPartidoService {
     @Override
     public Page<Partido> listarPaginado(Pageable pageable) {
         return repo.findAll(pageable);
+    }
+
+    @Override
+    public List<TablaPosicionesDTO> listarTablaPosiciones() {
+        List<TablaPosicionesDTO> tablaposiciones = new ArrayList<>();
+        repo.listarTablaPosiciones().forEach(t -> {
+            TablaPosicionesDTO tp = new TablaPosicionesDTO();
+            tp.setEquipo(String.valueOf(t[0]));
+            tp.setPuntos(Integer.parseInt(String.valueOf(t[1])));
+            tp.setPartidosJugados(Integer.parseInt(String.valueOf(t[2])));
+            tp.setPartidosGanados(Integer.parseInt(String.valueOf(t[3])));
+            tp.setPartidosEmpatados(Integer.parseInt(String.valueOf(t[4])));
+            tp.setPartidosPerdidos(Integer.parseInt(String.valueOf(t[5])));
+            tp.setGolesMarcados(Integer.parseInt(String.valueOf(t[6])));
+            tp.setGolesRecibidos(Integer.parseInt(String.valueOf(t[7])));
+            tp.setGolDiferencia(Integer.parseInt(String.valueOf(t[8])));
+            tablaposiciones.add(tp);
+        });
+        return tablaposiciones;
     }
 }
