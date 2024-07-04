@@ -3,6 +3,7 @@ package com.tuligapro.dtos;
 import java.io.Serializable;
 
 public class TablaPosicionesDTO implements Serializable {
+    private int posicion;
     private String equipo;
     private int puntos;
     private int partidosJugados;
@@ -16,8 +17,9 @@ public class TablaPosicionesDTO implements Serializable {
     public TablaPosicionesDTO() {
     }
 
-    public TablaPosicionesDTO(String equipo, int puntos, int partidosJugados, int partidosGanados, int partidosEmpatados,
+    public TablaPosicionesDTO(int posicion, String equipo, int puntos, int partidosJugados, int partidosGanados, int partidosEmpatados,
                               int partidosPerdidos, int golesMarcados, int golesRecibidos, int golDiferencia) {
+        this.posicion = posicion;
         this.equipo = equipo;
         this.puntos = puntos;
         this.partidosJugados = partidosJugados;
@@ -27,6 +29,14 @@ public class TablaPosicionesDTO implements Serializable {
         this.golesMarcados = golesMarcados;
         this.golesRecibidos = golesRecibidos;
         this.golDiferencia = golDiferencia;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 
     public String getEquipo() {

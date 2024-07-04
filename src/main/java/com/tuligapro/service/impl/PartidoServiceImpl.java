@@ -56,15 +56,16 @@ public class PartidoServiceImpl implements IPartidoService {
         List<TablaPosicionesDTO> tablaposiciones = new ArrayList<>();
         repo.listarTablaPosiciones().forEach(t -> {
             TablaPosicionesDTO tp = new TablaPosicionesDTO();
-            tp.setEquipo(String.valueOf(t[0]));
-            tp.setPuntos(Integer.parseInt(String.valueOf(t[1])));
-            tp.setPartidosJugados(Integer.parseInt(String.valueOf(t[2])));
-            tp.setPartidosGanados(Integer.parseInt(String.valueOf(t[3])));
-            tp.setPartidosEmpatados(Integer.parseInt(String.valueOf(t[4])));
-            tp.setPartidosPerdidos(Integer.parseInt(String.valueOf(t[5])));
-            tp.setGolesMarcados(Integer.parseInt(String.valueOf(t[6])));
-            tp.setGolesRecibidos(Integer.parseInt(String.valueOf(t[7])));
-            tp.setGolDiferencia(Integer.parseInt(String.valueOf(t[8])));
+            tp.setPosicion(Integer.parseInt(String.valueOf(t[0])));
+            tp.setEquipo(String.valueOf(t[1]));
+            tp.setPuntos(Integer.parseInt(String.valueOf(t[2])));
+            tp.setPartidosJugados(Integer.parseInt(String.valueOf(t[3])));
+            tp.setPartidosGanados(Integer.parseInt(String.valueOf(t[4])));
+            tp.setPartidosEmpatados(Integer.parseInt(String.valueOf(t[5])));
+            tp.setPartidosPerdidos(Integer.parseInt(String.valueOf(t[6])));
+            tp.setGolesMarcados(Integer.parseInt(String.valueOf(t[7])));
+            tp.setGolesRecibidos(Integer.parseInt(String.valueOf(t[8])));
+            tp.setGolDiferencia(Integer.parseInt(String.valueOf(t[9])));
             tablaposiciones.add(tp);
         });
         return tablaposiciones;
