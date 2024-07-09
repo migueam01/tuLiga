@@ -3,7 +3,11 @@ package com.tuligapro.dtos;
 import java.io.Serializable;
 
 public class TablaPosicionesDTO implements Serializable {
-    private int posicion;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int posicion;
     private String equipo;
     private int puntos;
     private int partidosJugados;

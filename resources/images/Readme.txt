@@ -1,1 +1,0 @@
-Colocar los recursos de imágenes

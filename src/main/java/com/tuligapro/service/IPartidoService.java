@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface IPartidoService extends ICRUD<Partido> {
 
-    Page<Partido> listarPaginado(Pageable pageable);
+	Page<Partido> listarPaginado(Pageable pageable);
 
-    List<TablaPosicionesDTO> listarTablaPosiciones();
+	List<TablaPosicionesDTO> listarTablaPosiciones();
+
+	byte[] generarPosiciones();
 }
